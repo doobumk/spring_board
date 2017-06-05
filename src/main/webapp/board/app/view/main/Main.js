@@ -1,0 +1,36 @@
+Ext.define('boad.view.main.Main',{
+	extend:'Ext.container.Container',
+	xtype:'main',
+	controller:'main',
+	viewModel:{
+		type:'main'
+	},
+	layout:{
+		type:'border'
+	},
+	items:[{
+		region:'north',
+		height:50,
+		bodyStyle:'background-color:black',
+		html:'<h2><font color="white">&nbsp;&nbsp;&nbsp;회원관리</font></h2>',
+	},{
+		region:'west',
+		title:'메뉴',
+		html:'메뉴',
+		collapsible:true,
+		width:200
+	},{
+		region:'center',
+		xtype:'tabpanel',
+		name:'mainbar',
+		items:[
+		{
+			title:'메뉴1',
+			html:'컨텐트 위치'
+		}]
+	},{
+		region:'south',
+		height:30,
+		html:'도움말'
+	}]
+});

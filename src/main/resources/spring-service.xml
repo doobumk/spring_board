@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx
+         http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <context:annotation-config/>
+    <aop:aspectj-autoproxy/>
+    <bean id="fileDownloadView" class="document.download.FileDownloadView">
+    </bean>
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="100000"/>
+    </bean>
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost/sp4chap09?characterEncoding=utf-8"/>
+        <property name="user" value="spring4"></property>
+        <property name="password" value="spring4"></property>
+    </bean>
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+            <property name="dataSource" ref="dataSource"/>
+    </bean>
+   <bean id="memberDao" class="member.MemberDao">
+    </bean>
+    <bean id="memberListAllService" class="member.sort.MemberListAllService">
+    </bean>
+    <bean id="memberDetailByIdService" class="member.sort.MemberDetailByIdService">
+    </bean>
+    <bean id="memberListByRegdateService" class="member.sort.MemberListByRegdateService">
+    </bean>
+    <bean id="memberRegSvc" class="member.register.MemberRegisterService">
+    </bean>
+    <bean id="changePasswordService" class="member.edit.ChangePasswordService">
+    </bean>
+    <bean id="authService" class="member.login.AuthService">
+    </bean>
+    <bean id="memberRegisterAcceptService" class="member.register.MemberRegisterAcceptService">
+    </bean>
+
+
+    <bean id="documentDao" class="document.DocumentDao">
+    </bean>
+    <bean id="documentWriteService" class="document.write.DocumentWriteService">
+    </bean>
+    <bean id="documentListAllService" class="document.sort.DocumentListAllService">
+    </bean>
+    <bean id="documentReadService" class="document.read.DocumentReadService">
+    </bean>
+    <bean id="documentDeleteService" class="document.delete.DocumentDeleteService">
+    </bean>
+    <bean id="documentUpdateService" class="document.update.DocumentUpdateService">
+    </bean>
+    <bean id="documentApprovalService" class="document.approval.DocumentApprovalService">
+    </bean>
+    <bean id="documentRejectService" class="document.reject.DocumentRejectService">
+    </bean>
+    <bean id="fileDownloadService" class="document.download.FileDownloadService">
+    </bean>
+
+
+    <bean id="checkLoginState" class="common.CheckLoginState">
+    </bean>
+    <bean id="checkAdminAuth" class="common.CheckAdminAuth">
+    </bean>
+
+
+    <bean id="commentDao" class="comment.CommentDao">
+    </bean>
+    <bean id="commentWriteService" class="comment.insert.CommentWriteService">
+    </bean>
+    <bean id="commentListService" class="comment.sort.CommentListService">
+    </bean>
+    <bean id="commentChildWriteService" class="comment.insert.CommentChildWriteService">
+    </bean>
+    <bean id="commentInfoService" class="comment.info.CommentInfoService">
+    </bean>
+    <bean id="commentParentDeleteService" class="comment.delete.CommentParentDeleteService">
+    </bean>
+    <bean id="commentChildDeleteService" class="comment.delete.CommentChildDeleteService">
+    </bean>
+    <bean id="commentUpdateService" class="comment.update.CommentUpdateService">
+    </bean>
+
+
+</beans>
